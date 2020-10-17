@@ -3,7 +3,7 @@ import os
 import json
 
 # To set your enviornment variables in your terminal run the following line:
-#export 'BEARER_TOKEN'='AAAAAAAAAAAAAAAAAAAAAELaIgEAAAAAtXWZfgXOTcMMk1KPaCKYDSFhtTo%3D453K3zQxmE0OEnOO1rgS5Jr7Zy2KwOZyONfEH4Shgg00cdfDAl'
+os.system("export 'BEARER_TOKEN'='AAAAAAAAAAAAAAAAAAAAAELaIgEAAAAAtXWZfgXOTcMMk1KPaCKYDSFhtTo%3D453K3zQxmE0OEnOO1rgS5Jr7Zy2KwOZyONfEH4Shgg00cdfDAl'")
 
 
 def create_headers(bearer_token):
@@ -43,7 +43,7 @@ def delete_all_rules(headers, bearer_token, rules):
     print(json.dumps(response.json()))
 
 
-def set_rules(headers, delete, bearer_token):
+"""def set_rules(headers, delete, bearer_token):
     # You can adjust the rules if needed
     sample_rules = [
         {"value": "basketball has:images", "tag": "basketball"},
@@ -59,8 +59,31 @@ def set_rules(headers, delete, bearer_token):
         raise Exception(
             "Cannot add rules (HTTP {}): {}".format(response.status_code, response.text)
         )
-    print(json.dumps(response.json()))
+    print(json.dumps(response.json()))"""
 
+#Only look for tweets with images by default
+def set_rules(headers, delete, bearer_token, topic, images=True, tag=None):
+    if not tag:
+        tag = topic
+    if images:
+        sample_rules = [
+            {"value": topic + " has: images", "tag": tag}
+        ]
+    else: 
+        sample_rules = [
+            {"value": topic, "tag": tag}
+        ]
+    payload = {"add": sample_rules}
+    response = requests.post(
+        "https://api.twitter.com/2/tweets/search/stream/rules",
+        headers=headers,
+        json=payload,
+    )
+    if response.status_code != 201:
+        raise Exception(
+            "Cannot add rules (HTTP {}): {}".format(response.status_code, response.text)
+        )
+    print(json.dumps(response.json()))
 
 def get_stream(headers, set, bearer_token):
     response = requests.get(
@@ -80,11 +103,12 @@ def get_stream(headers, set, bearer_token):
 
 
 def main():
+    topic = input("Topic: ")
     bearer_token = os.environ.get("BEARER_TOKEN")
     headers = create_headers(bearer_token)
     rules = get_rules(headers, bearer_token)
     delete = delete_all_rules(headers, bearer_token, rules)
-    set = set_rules(headers, delete, bearer_token)
+    set = set_rules(headers, delete, bearer_token, topic)
     get_stream(headers, set, bearer_token)
 
 
