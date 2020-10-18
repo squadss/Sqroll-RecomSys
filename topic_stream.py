@@ -2,8 +2,13 @@ import requests
 import os
 import json
 
-# To set your enviornment variables in your terminal run the following line:
-os.system("export 'BEARER_TOKEN'='AAAAAAAAAAAAAAAAAAAAAELaIgEAAAAAtXWZfgXOTcMMk1KPaCKYDSFhtTo%3D453K3zQxmE0OEnOO1rgS5Jr7Zy2KwOZyONfEH4Shgg00cdfDAl'")
+"""
+Run this file with: python3 topic_stream.py
+Description: Will ask you for topic, and output ONE tweet about that topic.
+
+The function that does the same thing without asking for input is called
+get_tweet(topic), and can be found at the bottom of this file.
+"""
 
 
 def create_headers(bearer_token):
@@ -69,7 +74,7 @@ def set_rules(headers, delete, bearer_token, topic, images=True, tag=None):
         sample_rules = [
             {"value": topic + " has: images", "tag": tag}
         ]
-    else: 
+    else:
         sample_rules = [
             {"value": topic, "tag": tag}
         ]
@@ -96,13 +101,22 @@ def get_stream(headers, set, bearer_token):
                 response.status_code, response.text
             )
         )
+
     for response_line in response.iter_lines():
         if response_line:
             json_response = json.loads(response_line)
             print(json.dumps(json_response, indent=4, sort_keys=True))
+            break
 
 
 def main():
+    load_token()
+    input_stream()
+
+"""
+This function asks user for an input, and streams ONE tweet about this topic.
+"""
+def input_stream():
     topic = input("Topic: ")
     bearer_token = os.environ.get("BEARER_TOKEN")
     headers = create_headers(bearer_token)
@@ -110,6 +124,25 @@ def main():
     delete = delete_all_rules(headers, bearer_token, rules)
     set = set_rules(headers, delete, bearer_token, topic)
     get_stream(headers, set, bearer_token)
+
+"""
+Recommend using this function for your parts. Same thing as the main function
+(i.e. identical to what happens when you run through terminal, but does
+NOT ask for input)
+"""
+def get_tweet(topic):
+    load_token()
+    bearer_token = os.environ.get("BEARER_TOKEN")
+    headers = create_headers(bearer_token)
+    rules = get_rules(headers, bearer_token)
+    delete = delete_all_rules(headers, bearer_token, rules)
+    set = set_rules(headers, delete, bearer_token, topic)
+    get_stream(headers, set, bearer_token)
+
+
+def load_token():
+    os.environ["BEARER_TOKEN"] = "AAAAAAAAAAAAAAAAAAAAAELaIgEAAAAAtXWZfgXOTcMMk1KPaCKYDSFhtTo%3D453K3zQxmE0OEnOO1rgS5Jr7Zy2KwOZyONfEH4Shgg00cdfDAl"
+
 
 
 if __name__ == "__main__":
