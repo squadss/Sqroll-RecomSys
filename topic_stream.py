@@ -129,9 +129,10 @@ def input_stream():
     get_stream(headers, set, bearer_token, numTweets=1)
 
 """
-Recommend using this function for your parts. Same thing as the main function
-(i.e. identical to what happens when you run through terminal, but does
-NOT ask for input)
+Recommend using this function for your parts.
+@param topic, is the topic of the tweet
+@param numTweets, is the number of tweets you want
+@returns a list of length numTweets, containing json elements of each tweet.
 """
 def get_tweet(topic, numTweets=1):
     load_token()
