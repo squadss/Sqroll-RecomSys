@@ -90,7 +90,7 @@ def set_rules(headers, delete, bearer_token, topic, images=True, tag=None):
         )
     print(json.dumps(response.json()))
 
-def get_stream(headers, set, bearer_token):
+def get_stream(headers, set, bearer_token, numTweets=1):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
     )
@@ -103,10 +103,12 @@ def get_stream(headers, set, bearer_token):
         )
 
     for response_line in response.iter_lines():
+        if not numTweets:
+            break
         if response_line:
             json_response = json.loads(response_line)
             print(json.dumps(json_response, indent=4, sort_keys=True))
-            break
+            numTweets -= 1
 
 
 def main():
@@ -123,21 +125,21 @@ def input_stream():
     rules = get_rules(headers, bearer_token)
     delete = delete_all_rules(headers, bearer_token, rules)
     set = set_rules(headers, delete, bearer_token, topic)
-    get_stream(headers, set, bearer_token)
+    get_stream(headers, set, bearer_token, numTweets=1)
 
 """
 Recommend using this function for your parts. Same thing as the main function
 (i.e. identical to what happens when you run through terminal, but does
 NOT ask for input)
 """
-def get_tweet(topic):
+def get_tweet(topic, numTweets=1):
     load_token()
     bearer_token = os.environ.get("BEARER_TOKEN")
     headers = create_headers(bearer_token)
     rules = get_rules(headers, bearer_token)
     delete = delete_all_rules(headers, bearer_token, rules)
     set = set_rules(headers, delete, bearer_token, topic)
-    get_stream(headers, set, bearer_token)
+    get_stream(headers, set, bearer_token, numTweets)
 
 
 def load_token():
