@@ -94,7 +94,7 @@ def get_stream(headers, set, bearer_token, numTweets=1):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
     )
-    print(response.status_code)
+    #print(response.status_code)
     if response.status_code != 200:
         raise Exception(
             "Cannot get stream (HTTP {}): {}".format(
@@ -107,7 +107,8 @@ def get_stream(headers, set, bearer_token, numTweets=1):
             break
         if response_line:
             json_response = json.loads(response_line)
-            print(json.dumps(json_response, indent=4, sort_keys=True))
+            yield json_response
+            #print(json.dumps(json_response, indent=4, sort_keys=True))
             numTweets -= 1
 
 
@@ -139,7 +140,8 @@ def get_tweet(topic, numTweets=1):
     rules = get_rules(headers, bearer_token)
     delete = delete_all_rules(headers, bearer_token, rules)
     set = set_rules(headers, delete, bearer_token, topic)
-    get_stream(headers, set, bearer_token, numTweets)
+    json_list = list(get_stream(headers, set, bearer_token, numTweets))
+    return json_list
 
 
 def load_token():
