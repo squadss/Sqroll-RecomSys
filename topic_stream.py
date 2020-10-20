@@ -90,7 +90,7 @@ def set_rules(headers, delete, bearer_token, topic, images=True, tag=None):
         )
     print(json.dumps(response.json()))
 
-def get_stream(headers, set, bearer_token, numTweets=1):
+def get_stream(headers, set, bearer_token):
     response = requests.get(
         "https://api.twitter.com/2/tweets/search/stream", headers=headers, stream=True,
     )
@@ -103,13 +103,10 @@ def get_stream(headers, set, bearer_token, numTweets=1):
         )
 
     for response_line in response.iter_lines():
-        if not numTweets:
-            break
         if response_line:
             json_response = json.loads(response_line)
             yield json_response
             #print(json.dumps(json_response, indent=4, sort_keys=True))
-            numTweets -= 1
 
 
 def main():
@@ -131,18 +128,16 @@ def input_stream():
 """
 Recommend using this function for your parts.
 @param topic, is the topic of the tweet
-@param numTweets, is the number of tweets you want
-@returns a list of length numTweets, containing json elements of each tweet.
+@returns a generator, returing a .json file everytime you call next.
 """
-def get_tweet(topic, numTweets=1):
+def get_tweet(topic):
     load_token()
     bearer_token = os.environ.get("BEARER_TOKEN")
     headers = create_headers(bearer_token)
     rules = get_rules(headers, bearer_token)
     delete = delete_all_rules(headers, bearer_token, rules)
     set = set_rules(headers, delete, bearer_token, topic)
-    json_list = list(get_stream(headers, set, bearer_token, numTweets))
-    return json_list
+    return get_stream(headers, set, bearer_token)
 
 
 def load_token():
