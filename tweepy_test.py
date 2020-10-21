@@ -33,7 +33,7 @@ def search_tweet(category, num_tweets=20):
     searches = []
     tweets_per_keyword = num_tweets // len(keywords)
     for key in keywords:
-        searches.extend(api.search(q = "basketball", lang = "en", count = tweets_per_keyword, result_type = "popular"))
+        searches.extend(api.search(q = key, lang = "en", count = tweets_per_keyword, result_type = "popular"))
     return searches
 
 
