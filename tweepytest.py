@@ -6,9 +6,32 @@ auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
 api = tweepy.API(auth)
 
 
-print(api.search(q = ["basketball", "anime"], lang = "en", count = 1, result_type = "popular"))
+#print(api.search(q = ["movie"], lang = "en", count = 1, result_type = "popular"))
 
 #FIGURE OUT WHAT TYPE AND HOW TO MANIPULATE
 #related tags
 
 
+class MyStreamListener(tweepy.StreamListener):
+
+    def on_status(self, status):
+        print(status.text)
+
+myStreamListener = MyStreamListener()
+myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
+
+print(type(myStream.filter(track=['python'])))
+
+#print(myStream.filter(follow=["2211149702"]))
+
+print("\n\n\n\n YESSIR")
+
+try:
+    print("Start streaming.")
+    myStream.sample(languages=["en"])
+except KeyboardInterrupt:
+    print("Stopped.")
+finally:
+    print("Done.")
+    myStream.disconnect()
+   
