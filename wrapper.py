@@ -13,7 +13,11 @@ you can change these
 """
 total_time = 60*10          # time to run whole script, in seconds
 re_multiSearch_time = 60*2  # time until you call multiSearch again, in seconds
+<<<<<<< HEAD
 re_pull_time = 5            # time until you pull tweets from multiSearch, IN SECONDS
+=======
+re_pull_time = 5            # time until you pull tweets from multiSearch, in seconds
+>>>>>>> 815bed33bffeaaab5425642a8917fe374a8a47fe
 
 
 t_end_all = time.time() + total_time
