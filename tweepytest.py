@@ -20,8 +20,5 @@ class MyStreamListener(tweepy.StreamListener):
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
 
-print(myStream.filter(track=['marvel']))
-
-#print(myStream.filter(follow=["2211149702"]))
-
-   
+myStream.new_session()
+myStream._run()

@@ -1,8 +1,11 @@
-car_keywords = ["tesla", "bmw", "racing", "mercedes", "car", "ferrari", "lamborghini"]
-car_users = {
-    "@mercedesbenz" : "54502344",
+car_keywords = ["tesla", "bmw", "racing", "mercedes", "car", "ferrari", "lamborghini",
+                "racecar", "mclaren", "audi", "porsche", "polestar"]
 
-    "@porsche" : "57016932",
+
+car_users = {
+    "mercedesbenz" : "54502344",
+
+    "porsche" : "57016932",
 
     "scuderiaferrari" : "108247668",
 
