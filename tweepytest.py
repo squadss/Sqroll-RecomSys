@@ -1,29 +1,28 @@
-import tweepy
+from tweepy.streaming import StreamListener
+from tweepy import OAuthHandler
+from tweepy import Stream
 
 consumer_key = "Fdi8u79pIEXGvMzZUglxtMRmc"
 consumer_secret = "yvxKZLusE5GZUS2tJ6ZFdfQ9K1ZfN6Ie8tfKfDn2mFrEcPxRlQ"
-auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
-api = tweepy.API(auth)
+access_token = "1313558487905910784-vCnDIrbDsfG6JkkBD7lANxv1ucpbu4"
+access_token_secret = "FAUAcXS6CdUKSQ1woyQzO1OcSAUlXNMt2NkBlsFdqCAJK"
 
 
-#print(api.search(q = ["movie"], lang = "en", count = 1, result_type = "popular"))
+class StdOutListener(StreamListener):
+    """ A listener handles tweets that are received from the stream.
+    This is a basic listener that just prints received tweets to stdout.
+    """
+    def on_data(self, data):
+        print(data)
+        return True
 
-#FIGURE OUT WHAT TYPE AND HOW TO MANIPULATE
-#related tags
+    def on_error(self, status):
+        print(status)
 
+if __name__ == '__main__':
+    listener = StdOutListener()
+    auth = OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
 
-class MyStreamListener(tweepy.StreamListener):
-
-    def on_status(self, status):
-        print(status.text)
-
-myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener, tweet_mode = "extended")
-
-myStream.filter(track=['python'], is_async=True)
-
-#print(myStream.filter(follow=["2211149702"]))
-
-print("\n\n\n\n YESSIR")
-
-   
+    stream = Stream(auth, listener)
+    stream.filter(follow = ["24742040"])
