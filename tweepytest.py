@@ -20,18 +20,5 @@ class MyStreamListener(tweepy.StreamListener):
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
 
-print(type(myStream.filter(track=['python'])))
-
-#print(myStream.filter(follow=["2211149702"]))
-
-print("\n\n\n\n YESSIR")
-
-try:
-    print("Start streaming.")
-    myStream.sample(languages=["en"])
-except KeyboardInterrupt:
-    print("Stopped.")
-finally:
-    print("Done.")
-    myStream.disconnect()
-   
+myStream.new_session()
+myStream._run()

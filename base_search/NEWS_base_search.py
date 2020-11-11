@@ -1,4 +1,5 @@
-news_keywords = ["news", "new york times", "politics", "election", "breaking news"]
+news_keywords = ["news", "new york times", "politics", "election", "breaking news",
+                    "washington post"]
 news_users = {
     "washingtonpost" : "2467791",
     "nytimes" : "807095",

@@ -1,6 +1,9 @@
-technology_keywords = ["apple", "artificial intelligence", "machine learning", "computer", "quantum"]
+technology_keywords = ["apple", "artificial intelligence", "machine learning", "computer",
+                        "quantum", "IBM", "iPhone", "data", "technology", "digital"]
+
+
 technology_users = {
-    "@elonmusk" : "44196397",
+    "elonmusk" : "44196397",
 
     "billgates" : "50393960",
 
