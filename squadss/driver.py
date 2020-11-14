@@ -1,3 +1,4 @@
+import sys
 import time
 import random
 from streamer import *
@@ -5,9 +6,10 @@ from streamer import *
 
 
 
-categories = ["sports", "animals", "gaming"]
+categories = []
 queues = []
 update_time = 5
+num_tweets_per_category = 5
 
 def queue():
     for category in categories:
@@ -16,18 +18,19 @@ def queue():
 def update():
     printlst = []
     for queue in queues:
-        if queue.qsize() < 5:
+        if queue.qsize() < num_tweets_per_category:
             temp = queue.qsize()    # whatever size of queue is 
         else:
-            temp = 5
+            temp = num_tweets_per_category
         for _ in range(temp):
             printlst.append(queue.get())  #thing from queue)
     printlst = random.sample(printlst, len(printlst))
-    for i in printlst:
-        print(i)
+    print(*printlst, sep="\n")
     return printlst
 
+
 def main():
+    categories = sys.argv[2:]
     queue()
     while True:
         print("-------------------------------------------------------------------------------------------------------------------------" + "\n")
