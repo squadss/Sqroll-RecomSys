@@ -6,16 +6,18 @@ from streamer import *
 
 
 
-categories = []
-queues = []
 update_time = 5
 num_tweets_per_category = 5
 
-def queue():
+def queue(categories):
+    queues = []
+
     for category in categories:
         queues.append(streaming(category))
+        
+    return queues
 
-def update():
+def update(queues):
     printlst = []
 
     for queue in queues:
@@ -34,13 +36,13 @@ def update():
 
 def main():
     categories = sys.argv[2:]
-    queue()
-    
+    queues = queue(categories)
+
     while True:
         print("-------------------------------------------------------------------------------------------------------------------------" + "\n")
         print("NEW UPDATE" + "\n")
         print("-------------------------------------------------------------------------------------------------------------------------")
-        update()
+        update(queues)
         time.sleep(update_time)
 
 if __name__ == "__main__":
