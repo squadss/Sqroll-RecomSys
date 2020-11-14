@@ -17,13 +17,16 @@ def queue():
 
 def update():
     printlst = []
+
     for queue in queues:
         if queue.qsize() < num_tweets_per_category:
             temp = queue.qsize()    # whatever size of queue is 
         else:
             temp = num_tweets_per_category
+
         for _ in range(temp):
             printlst.append(queue.get())  #thing from queue)
+
     printlst = random.sample(printlst, len(printlst))
     print(*printlst, sep="\n")
     return printlst
@@ -32,6 +35,7 @@ def update():
 def main():
     categories = sys.argv[2:]
     queue()
+    
     while True:
         print("-------------------------------------------------------------------------------------------------------------------------" + "\n")
         print("NEW UPDATE" + "\n")
