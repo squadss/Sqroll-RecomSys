@@ -1,5 +1,5 @@
 #20 keywords associated with the category you are given.
-travelKeywords = ["travel", "Asia Travel", "Europe Travel", "Africa Travel", "South American Travel",
+travelKeywords = ["travel", "Asia Travel", "Europe Travel", "Africa Travel", "South America Travel",
                     "paradise", "New York City", "travel inspiration", ""]
 
 #“YOURCATEGORYUsers”: 20 popular users that tweet content from your category
