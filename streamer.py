@@ -2,7 +2,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from queue import PriorityQueue
-from base_search import travel_base_search
+import base_search
 import json
 import twitter_credentials
 import io
@@ -65,7 +65,7 @@ def streaming(category):
 
     stream = Stream(auth, listener)
 
-    stream.filter(track = ["biden"], languages = ['en'], is_async = True, filter_level = "medium")
+    stream.filter(follow = getattr(base_search, category + "_users").values, track = getattr(base_search, category + "_keywords"), languages = ['en'], is_async = True, filter_level = "low")
 
 
 if __name__ == '__main__':
