@@ -22,6 +22,7 @@ class StdOutListener(StreamListener):
 
     def on_data(self, data):
         #data = filter(data)
+
         saveFile = io.open('raw_tweets.json', 'a', encoding='utf-8')
         while (time.time() - self.time) < self.limit:
             try:
@@ -40,7 +41,7 @@ class StdOutListener(StreamListener):
         saveFile.write(u'\n]')
         saveFile.close()
         exit()
-        
+    
 
         """
         data = json.loads(data)
@@ -64,8 +65,7 @@ def streaming(category):
 
     stream = Stream(auth, listener)
 
-    stream.filter(follow = travel_base_search.travelUsers.values(), 
-    track = travel_base_search.travelKeywords, languages = ['en'], is_async = True)
+    stream.filter(track = ["biden"], languages = ['en'], is_async = True, filter_level = "medium")
 
 
 if __name__ == '__main__':
