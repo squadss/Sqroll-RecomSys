@@ -27,9 +27,9 @@ artUsers = {
 			"obeygiant" : "17225211"
 			}
 
-car_keywords = ["tesla", "bmw", "racing", "mercedes", "car", "ferrari", "trucks", "lamborghini"]
+carKeywords = ["tesla", "bmw", "racing", "mercedes", "car", "ferrari", "trucks", "lamborghini"]
 
-car_users = {
+carUsers = {
     "@mercedesbenz" : "54502344",
 
     "@porsche" : "57016932",
@@ -41,7 +41,7 @@ car_users = {
     "astonmartin" : "102323621"
 }
 
-entertainment_keywords = ["movies", "tv", "netflix", "celebrity", "disney", "marvel"]
+entertainmentKeywords = ["movies", "tv", "netflix", "celebrity", "disney", "marvel"]
 
 
 #20 keywords associated with the category you are given.
@@ -71,8 +71,8 @@ foodUsers = {
 			"spoonuniversity" : "1451713728"
 			}
 
-news_keywords = ["news", "new york times", "politics", "election", "breaking news"]
-news_users = {
+newsKeywords = ["news", "new york times", "politics", "election", "breaking news"]
+newsUsers = {
     "washingtonpost" : "2467791",
     "nytimes" : "807095",
     "theeconomist" : "5988062",
@@ -80,8 +80,9 @@ news_users = {
     "wsj" : "3108351"
 }
 
-science_keywords = ["elon musk", "physics", "nobel", "nasa", "science",
+scienceKeywords = ["elon musk", "physics", "nobel", "nasa", "science",
 "technology", "physics", "chemistry"]
+scienceUsers = []
 
 sportsKeywords = ["basketball", "football", "soccer", "baseball", "hockey",
  "tennis", "NBA", "NFL", "MLB", "NHL", "Champions League", "Premier League",
@@ -98,10 +99,10 @@ sportsUsers = {"wojespn" : "50323173",
 				"HoHighlights" : "363183318"
 				}
 
-technology_keywords = ["apple", "artificial intelligence",
+technologyKeywords = ["apple", "artificial intelligence",
 "machine learning", "computer", "quantum"]
 
-technology_users = {
+technologyUsers = {
     "elonmusk" : "44196397",
 
     "billgates" : "50393960",
