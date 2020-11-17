@@ -23,7 +23,7 @@ artUsers = {
 			"steveespopowers" : "55268835",
 			"aiww" : "43654274",
 			"osgemeos" : "85857432",
-			"bennygold" : "16676450"
+			"bennygold" : "16676450",
 			"obeygiant" : "17225211"
 			}
 
@@ -114,7 +114,7 @@ technologyUsers = {
 
 #20 keywords associated with the category you are given.
 travelKeywords = ["travel", "Asia Travel", "Europe Travel", "Africa Travel", "South American Travel",
-                    "paradise", "New York City", "travel inspiration", ""]
+                    "paradise", "New York City", "travel inspiration"]
 
 #“YOURCATEGORYUsers”: 20 popular users that tweet content from your category
 travelUsers = {"NatGeoTravel" : "36184220", "CNNTravel" : "174377718",
