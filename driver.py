@@ -1,7 +1,7 @@
 import sys
 import time
 import random
-from streamer import *
+from test_driver import *
 
 
 update_time = 5                 # time until next update
@@ -20,7 +20,7 @@ def queue(categories):
     queues = []
 
     for category in categories:             
-        queues.append(streaming(category))
+        queues.append(streaming(category).tweets)
 
     return queues
 
@@ -51,7 +51,7 @@ def update(queues):
 
 
 def main():
-     """
+    """
     Takes command line inputs and runs the program.
 
         Parameters:
