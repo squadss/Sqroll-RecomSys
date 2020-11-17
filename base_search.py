@@ -23,7 +23,7 @@ artUsers = {
 			"steveespopowers" : "55268835",
 			"aiww" : "43654274",
 			"osgemeos" : "85857432",
-			"bennygold" : "16676450"
+			"bennygold" : "16676450",
 			"obeygiant" : "17225211"
 			}
 

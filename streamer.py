@@ -2,7 +2,7 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from queue import PriorityQueue
-import base_search
+from base_search import *
 import json
 import twitter_credentials
 import io
@@ -58,18 +58,19 @@ class StdOutListener(StreamListener):
 def filter(data):
 """
 
-def streaming(category):
-    listener = StdOutListener(category)
+def streaming(time, category):
+    listener = StdOutListener(time)
     auth = OAuthHandler(twitter_credentials.consumer_key, twitter_credentials.consumer_secret)
     auth.set_access_token(twitter_credentials.access_token, twitter_credentials.access_token_secret)
 
     stream = Stream(auth, listener)
-
-    stream.filter(follow = getattr(base_search, category + "_users").values, track = getattr(base_search, category + "_keywords"), languages = ['en'], is_async = True, filter_level = "low")
+    print("HI")
+    #stream.filter(follow = eval(category + "Users").values(), track = eval(category + "Keywords"), languages = ['en'], is_async = True, filter_level = None)
+    stream.filter(track = ["trump", "president", "biden", "count", "vote"], languages = ['en'], is_async = True, filter_level = None)
 
 
 if __name__ == '__main__':
-    streaming(time.time())
+    streaming(time.time(), "art")
 
 
 
