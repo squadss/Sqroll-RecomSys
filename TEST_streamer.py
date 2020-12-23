@@ -23,7 +23,7 @@ class StdOutListener(StreamListener):
         #print(data.get("text"))
         #-data.get("retweet_count", 0) - data.get("favorite_count", 0)
         # TODO: FIX PRIORITY QUEUE , putting two items with priority 0 fucks shit up, cuz get retweecount don work
-
+        
         self.tweets.put(data)
         return True
 
